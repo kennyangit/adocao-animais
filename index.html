@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adote um Amigo | Encontre seu novo companheiro</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='65' rx='20' ry='25' fill='%2316a34a'/%3E%3Ccircle cx='35' cy='35' r='12' fill='%2316a34a'/%3E%3Ccircle cx='65' cy='35' r='12' fill='%2316a34a'/%3E%3Ccircle cx='25' cy='55' r='10' fill='%2316a34a'/%3E%3Ccircle cx='75' cy='55' r='10' fill='%2316a34a'/%3E%3C/svg%3E">
+  <meta name="description"
+    content="Plataforma de adoção responsável de animais. Encontre cães e gatos que precisam de um lar.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac', 400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
+            accent: { 50: '#fff7ed', 100: '#ffedd5', 200: '#fed7aa', 300: '#fdba74', 400: '#fb923c', 500: '#f97316', 600: '#ea580c' },
+            sky: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9' }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'system-ui', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'slide-up': 'slideUp 0.6s ease-out forwards',
+            'scale-in': 'scaleIn 0.4s ease-out forwards'
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            scaleIn: { '0%': { opacity: '0', transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-sans text-gray-800 antialiased">
+  <!-- Navbar -->
+  <nav id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 md:h-20">
+        <a href="#" class="flex items-center gap-2 group">
+          <i class="fa-solid fa-paw text-2xl text-primary-600 group-hover:text-primary-700 transition-colors"></i>
+          <span
+            class="font-display font-bold text-xl text-primary-600 group-hover:text-primary-700 transition-colors">Adote
+            um Amigo</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#inicio"
+            class="nav-link text-gray-600 hover:text-primary-600 font-medium transition-colors">Início</a>
+          <a href="#animais" class="nav-link text-gray-600 hover:text-primary-600 font-medium transition-colors">Animais
+            para adoção</a>
+          <a href="#como-adotar"
+            class="nav-link text-gray-600 hover:text-primary-600 font-medium transition-colors">Como adotar</a>
+          <a href="#depoimentos"
+            class="nav-link text-gray-600 hover:text-primary-600 font-medium transition-colors">Avaliações</a>
+          <a href="#contato"
+            class="nav-link text-gray-600 hover:text-primary-600 font-medium transition-colors">Contato</a>
+          <a href="#sobre" class="nav-link text-gray-600 hover:text-primary-600 font-medium transition-colors">Sobre</a>
+        </div>
+        <button id="menu-toggle"
+          class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+          aria-label="Abrir menu">
+          <svg class="w-6 h-6 menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="w-6 h-6 menu-icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg">
+      <div class="px-4 py-4 space-y-2">
+        <a href="#inicio"
+          class="mobile-nav-link block px-4 py-3 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors">Início</a>
+        <a href="#animais"
+          class="mobile-nav-link block px-4 py-3 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors">Animais
+          para adoção</a>
+        <a href="#como-adotar"
+          class="mobile-nav-link block px-4 py-3 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors">Como
+          adotar</a>
+        <a href="#depoimentos"
+          class="mobile-nav-link block px-4 py-3 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors">Avaliações</a>
+        <a href="#contato"
+          class="mobile-nav-link block px-4 py-3 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors">Contato</a>
+        <a href="#sobre"
+          class="mobile-nav-link block px-4 py-3 rounded-lg text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors">Sobre</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1920&q=80" alt="Cachorro e gato juntos"
+        class="w-full h-full object-cover scale-animate" loading="eager">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-900/80 via-primary-700/60 to-accent-600/50"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1
+        class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6 hero-title drop-shadow-lg">
+        Encontre um novo <span class="text-accent-300">melhor amigo</span>
+      </h1>
+      <p class="text-xl sm:text-2xl text-white/90 mb-10 max-w-2xl mx-auto hero-subtitle font-light">
+        Milhares de animais esperam por um lar. A adoção responsável transforma vidas.
+      </p>
+      <a href="#animais"
+        class="cta-button inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white font-semibold px-8 py-4 rounded-full text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+        Adotar agora
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <a href="#animais" class="text-white/80 hover:text-white transition-colors">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Animais para Adoção -->
+  <section id="animais" class="py-20 lg:py-28 bg-sky-50/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 scroll-reveal">
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-gray-900 mb-4">Animais para adoção</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Conheça nossos amigos que estão à procura de um lar cheio de
+          amor.</p>
+      </div>
+
+      <!-- Filtros (recolhível) -->
+      <div class="filter-collapsible bg-white rounded-2xl shadow-lg overflow-hidden mb-12 scroll-reveal">
+        <button type="button" id="filter-trigger"
+          class="w-full px-6 py-4 flex items-center justify-between gap-4 text-left hover:bg-gray-50 transition-colors">
+          <span class="font-semibold text-gray-800 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-primary-500"></i>
+            Filtrar animais
+          </span>
+          <span id="filter-summary" class="text-sm text-gray-500 truncate flex-1">Todos os filtros</span>
+          <i
+            class="fa-solid fa-chevron-down filter-chevron text-primary-500 transition-transform duration-300 flex-shrink-0"></i>
+        </button>
+        <div id="filter-options" class="filter-options border-t border-gray-100">
+          <div class="p-6 space-y-6">
+            <div class="filter-group">
+              <span class="filter-label">Espécie</span>
+              <div class="filter-chips" data-filter="species">
+                <button type="button" class="filter-chip active" data-value="" data-label="Todos">Todos</button>
+                <button type="button" class="filter-chip" data-value="cachorro" data-label="Cachorro">
+                  <i class="fa-solid fa-dog mr-1.5 text-sm"></i>Cachorro
+                </button>
+                <button type="button" class="filter-chip" data-value="gato" data-label="Gato">
+                  <i class="fa-solid fa-cat mr-1.5 text-sm"></i>Gato
+                </button>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">Idade</span>
+              <div class="filter-chips" data-filter="age">
+                <button type="button" class="filter-chip active" data-value="" data-label="Todas">Todas</button>
+                <button type="button" class="filter-chip" data-value="filhote" data-label="Filhote">Filhote</button>
+                <button type="button" class="filter-chip" data-value="adulto" data-label="Adulto">Adulto</button>
+                <button type="button" class="filter-chip" data-value="idoso" data-label="Idoso">Idoso</button>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">Tamanho</span>
+              <div class="filter-chips" data-filter="size">
+                <button type="button" class="filter-chip active" data-value="" data-label="Todos">Todos</button>
+                <button type="button" class="filter-chip" data-value="pequeno" data-label="Pequeno">Pequeno</button>
+                <button type="button" class="filter-chip" data-value="medio" data-label="Médio">Médio</button>
+                <button type="button" class="filter-chip" data-value="grande" data-label="Grande">Grande</button>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">Localização</span>
+              <div class="filter-chips" data-filter="location">
+                <button type="button" class="filter-chip active" data-value="" data-label="Todas">Todas</button>
+                <button type="button" class="filter-chip" data-value="sao-paulo" data-label="São Paulo">
+                  <i class="fa-solid fa-location-dot mr-1.5 text-sm opacity-70"></i>São Paulo
+                </button>
+                <button type="button" class="filter-chip" data-value="rio-de-janeiro" data-label="Rio de Janeiro">
+                  <i class="fa-solid fa-location-dot mr-1.5 text-sm opacity-70"></i>Rio de Janeiro
+                </button>
+                <button type="button" class="filter-chip" data-value="belo-horizonte" data-label="Belo Horizonte">
+                  <i class="fa-solid fa-location-dot mr-1.5 text-sm opacity-70"></i>Belo Horizonte
+                </button>
+                <button type="button" class="filter-chip" data-value="curitiba" data-label="Curitiba">
+                  <i class="fa-solid fa-location-dot mr-1.5 text-sm opacity-70"></i>Curitiba
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Cards -->
+      <div id="animals-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <!-- Cards injetados via JavaScript -->
+      </div>
+      <p id="no-results" class="text-center text-gray-500 py-12 hidden">Nenhum animal encontrado com os filtros
+        selecionados.</p>
+    </div>
+  </section>
+
+  <!-- Modal Detalhes do Animal -->
+  <div id="animal-modal" class="animal-modal hidden fixed inset-0 z-[100] overflow-y-auto" aria-hidden="true"
+    role="dialog" aria-labelledby="modal-title">
+    <div class="animal-modal-overlay fixed inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity"></div>
+    <div class="animal-modal-container flex min-h-full items-center justify-center p-4">
+      <div id="animal-modal-content"
+        class="animal-modal-content relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all">
+        <button type="button" id="animal-modal-close"
+          class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors"
+          aria-label="Fechar">
+          <i class="fa-solid fa-times text-lg"></i>
+        </button>
+        <div id="animal-modal-body">
+          <!-- Conteúdo injetado via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Como funciona -->
+  <section id="como-adotar" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 scroll-reveal">
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-gray-900 mb-4">Como funciona a adoção</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">Em poucos passos você pode dar um novo lar a um animal.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div
+          class="step-card scroll-reveal group text-center p-8 rounded-2xl bg-primary-50 hover:bg-primary-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <div
+            class="w-16 h-16 mx-auto mb-6 rounded-full bg-primary-500 text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+            1</div>
+          <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Escolha um animal</h3>
+          <p class="text-gray-600">Navegue pelos perfis e encontre aquele que combina com você.</p>
+        </div>
+        <div
+          class="step-card scroll-reveal group text-center p-8 rounded-2xl bg-sky-50 hover:bg-sky-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <div
+            class="w-16 h-16 mx-auto mb-6 rounded-full bg-sky-500 text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+            2</div>
+          <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Entre em contato</h3>
+          <p class="text-gray-600">Preencha o formulário ou envie uma mensagem para nós.</p>
+        </div>
+        <div
+          class="step-card scroll-reveal group text-center p-8 rounded-2xl bg-accent-50 hover:bg-accent-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <div
+            class="w-16 h-16 mx-auto mb-6 rounded-full bg-accent-500 text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+            3</div>
+          <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Processo de adoção</h3>
+          <p class="text-gray-600">Conversa, visita e documentação para garantir um lar seguro.</p>
+        </div>
+        <div
+          class="step-card scroll-reveal group text-center p-8 rounded-2xl bg-primary-50 hover:bg-primary-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <div
+            class="w-16 h-16 mx-auto mb-6 rounded-full bg-primary-600 text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+            4</div>
+          <h3 class="font-display font-bold text-xl text-gray-900 mb-2">Leve para casa</h3>
+          <p class="text-gray-600">Celebre! Seu novo amigo está pronto para uma vida feliz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos" class="py-12 sm:py-16 lg:py-28 bg-sky-50/50">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="text-center mb-8 sm:mb-14 scroll-reveal">
+        <h2 class="font-display font-bold text-xl sm:text-3xl lg:text-4xl text-gray-900 mb-3 sm:mb-4 px-2">Quem adotou,
+          recomenda</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg px-2">Histórias reais de famílias que encontraram
+          amor na adoção.</p>
+      </div>
+      <div class="relative max-w-4xl mx-auto px-0 sm:px-4">
+        <div id="testimonials-slider" class="overflow-hidden rounded-xl sm:rounded-2xl">
+          <div class="testimonial-slide flex transition-transform duration-500 ease-out" id="testimonials-track">
+            <!-- Slides injetados via JS -->
+          </div>
+        </div>
+        <div class="flex justify-center items-center gap-2 sm:gap-4 mt-6 sm:mt-8 flex-wrap">
+          <button id="testimonial-prev"
+            class="p-2.5 sm:p-3 rounded-full bg-white shadow-md hover:bg-primary-50 hover:text-primary-600 transition-colors flex-shrink-0"
+            aria-label="Anterior">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <div id="testimonial-dots" class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0"></div>
+          <button id="testimonial-next"
+            class="p-2.5 sm:p-3 rounded-full bg-white shadow-md hover:bg-primary-50 hover:text-primary-600 transition-colors flex-shrink-0"
+            aria-label="Próximo">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-primary-600 to-primary-800 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1920&q=80" alt=""
+        class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center scroll-reveal">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-white mb-4">Pronto para mudar uma vida?</h2>
+      <p class="text-primary-100 text-lg mb-8">A adoção responsável é um ato de amor. Milhares de animais aguardam um
+        lar.</p>
+      <a href="#animais"
+        class="inline-flex items-center gap-2 bg-white text-primary-700 font-semibold px-8 py-4 rounded-full text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+        Ver animais disponíveis
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto scroll-reveal">
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-gray-900 mb-4 text-center">Entre em contato</h2>
+        <p class="text-gray-600 text-center mb-10">Dúvidas sobre adoção? Envie sua mensagem.</p>
+        <form id="contact-form" class="space-y-6 bg-gray-50 p-8 rounded-2xl shadow-lg">
+          <div>
+            <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+            <input type="text" id="contact-name" name="name" required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+              placeholder="Seu nome">
+            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+          </div>
+          <div>
+            <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input type="email" id="contact-email" name="email" required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+              placeholder="seu@email.com">
+            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+          </div>
+          <div>
+            <label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+            <textarea id="contact-message" name="message" rows="5" required
+              class="form-input w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all resize-none"
+              placeholder="Sua mensagem..."></textarea>
+            <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+          </div>
+          <button type="submit"
+            class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+            Enviar mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre (resumido no footer) -->
+  <footer id="sobre" class="bg-gray-900 text-gray-300 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-paw text-2xl text-primary-400"></i>
+            <span class="font-display font-bold text-xl text-white">Adote um Amigo</span>
+          </div>
+          <p class="text-sm">Promovendo a adoção responsável e o bem-estar animal desde 2020. Cada adoção é uma vida
+            transformada.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Links rápidos</h4>
+          <ul class="space-y-2">
+            <li><a href="#inicio" class="hover:text-primary-400 transition-colors">Início</a></li>
+            <li><a href="#animais" class="hover:text-primary-400 transition-colors">Animais para adoção</a></li>
+            <li><a href="#como-adotar" class="hover:text-primary-400 transition-colors">Como adotar</a></li>
+            <li><a href="#depoimentos" class="hover:text-primary-400 transition-colors">Avaliações</a></li>
+            <li><a href="#contato" class="hover:text-primary-400 transition-colors">Contato</a></li>
+            <li><a href="#sobre" class="hover:text-primary-400 transition-colors">Sobre</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Redes sociais</h4>
+          <div class="flex gap-4">
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+              aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+              aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
+              aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+        © <span id="current-year"></span> Adote um Amigo. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
