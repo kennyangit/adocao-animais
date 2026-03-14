@@ -374,11 +374,11 @@ button:focus-visible {
 
 /* Closing state — plays before hidden is applied */
 .animal-modal-closing .animal-modal-content {
-  animation: modalSlideOut 0.35s ease-in forwards;
+  animation: modalSlideOut 0.22s ease-in forwards;
 }
 
 .animal-modal-closing .animal-modal-overlay {
-  animation: fadeOut 0.35s ease-in forwards;
+  animation: fadeOut 0.22s ease-in forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
