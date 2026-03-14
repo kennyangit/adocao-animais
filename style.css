@@ -250,6 +250,86 @@ nav.scrolled {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
 }
 
+/* ── Mobile Menu Animation ───────────────────────────────────── */
+#mobile-menu {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  overflow: hidden;
+  visibility: hidden;
+  transition:
+    max-height 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+#mobile-menu.mobile-menu-open {
+  max-height: 480px;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition:
+    max-height 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0s linear 0s;
+}
+
+/* stagger nav links on open */
+#mobile-menu .mobile-nav-link {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.35s ease-out, transform 0.35s ease-out, background-color 0.2s, color 0.2s;
+}
+
+#mobile-menu.mobile-menu-open .mobile-nav-link {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* cascade delay per link */
+#mobile-menu .mobile-nav-link:nth-child(1) { transition-delay: 0.06s; }
+#mobile-menu .mobile-nav-link:nth-child(2) { transition-delay: 0.10s; }
+#mobile-menu .mobile-nav-link:nth-child(3) { transition-delay: 0.14s; }
+#mobile-menu .mobile-nav-link:nth-child(4) { transition-delay: 0.18s; }
+#mobile-menu .mobile-nav-link:nth-child(5) { transition-delay: 0.22s; }
+#mobile-menu .mobile-nav-link:nth-child(6) { transition-delay: 0.26s; }
+
+/* ── Hamburger / X Icon Animation ───────────────────────────── */
+/* Stack both icons on top of each other inside the button */
+#menu-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.menu-icon-open,
+.menu-icon-close {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Closed state: X is invisible and pre-rotated */
+.menu-icon-close {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+}
+
+/* Open state: hamburger rotates out, X rotates in */
+#menu-toggle[aria-expanded="true"] .menu-icon-open {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
+}
+
+#menu-toggle[aria-expanded="true"] .menu-icon-close {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid #22c55e;
@@ -272,12 +352,33 @@ button:focus-visible {
   }
 }
 
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+}
+
 .animal-modal.hidden {
   pointer-events: none;
 }
 
 .animal-modal:not(.hidden) .animal-modal-overlay {
   animation: fadeIn 0.2s ease-out;
+}
+
+/* Closing state — plays before hidden is applied */
+.animal-modal-closing .animal-modal-content {
+  animation: modalSlideOut 0.35s ease-in forwards;
+}
+
+.animal-modal-closing .animal-modal-overlay {
+  animation: fadeOut 0.35s ease-in forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -300,5 +401,20 @@ button:focus-visible {
 
   .animal-card:hover img {
     transform: none;
+  }
+
+  /* Disable mobile menu animation for users who prefer reduced motion */
+  #mobile-menu,
+  #mobile-menu.mobile-menu-open,
+  #mobile-menu .mobile-nav-link,
+  #mobile-menu.mobile-menu-open .mobile-nav-link {
+    transition: none;
+    transform: none;
+  }
+
+  #mobile-menu.mobile-menu-open {
+    opacity: 1;
+    max-height: 480px;
+    visibility: visible;
   }
 }
